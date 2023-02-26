@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/mratanusarkar/NodeJS-Logging-Mechanism/issues"
   },
-  "homepage": "https://github.com/mratanusarkar/NodeJS-Logging-Mechanism#readme"
+  "homepage": "https://github.com/mratanusarkar/NodeJS-Logging-Mechanism#readme",
+  "dependencies": {
+    "winston": "^3.8.2"
+  }
 }
