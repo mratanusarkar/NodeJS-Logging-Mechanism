@@ -1,47 +1,22 @@
-const winston = require('winston');
+const logger = require('./logger/logger');
 
-// decide on log level based on environment [dev / qa / staging / prod]
-const environment = 'dev'; // to be added from process.env
-let level = environment === 'prod' ? 'http' : 'silly'
+function todo() {
+    try {
 
-// default meta data
-let project = 'Project Logging'
-let repo = 'NodeJS-Logging-Mechanism'
-let type = 'script'
-let location = 'local runtime'
+        logger.log.silly("This is a silly log.", { category: 'index.js', subcategory: 'todo()' });
+        logger.log.debug("This is a debug log.", { category: 'index.js', subcategory: 'todo()' });
+        logger.log.verbose("This is a verbose log.", { category: 'index.js', subcategory: 'todo()' });
+        logger.log.http("This is a http log.", { category: 'index.js', subcategory: 'todo()' });
+        logger.log.info("This is a info log.", { category: 'index.js', subcategory: 'todo()' });
+        logger.log.warn("This is a warn log.", { category: 'index.js', subcategory: 'todo()' });
+        logger.log.error("This is a error log.", { category: 'index.js', subcategory: 'todo()' });
 
-// output file
-let logDir = './logFiles/';
-let date = new Date().toISOString().split('T')[0];
-let errorFilePath = logDir + date + '-' + 'error.log';
-let comboFilePath = logDir + date + '-' + 'combined.log';
+        let a = mssql.a();
+        console.log("print a:", a); // this line will never work due to error above
 
+    } catch (error) {
+        logger.log.error(error, { category: 'index.js', subcategory: 'todo()' });
+    }
+}
 
-/*
- * Note: Log Levels used as per RFC5424 are:
- * 0: error
- * 1: warn
- * 2: info
- * 3: http
- * 4: verbose
- * 5: debug
- * 6: silly
- */
-const log = winston.createLogger({
-    level: level,
-    format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.errors({ stack: true }),
-        winston.format.splat(),
-        winston.format.json()
-    ),
-    defaultMeta: { project: project, repo: repo, type: type, location: location },
-    transports: [
-        new winston.transports.File({ filename: errorFilePath, level: 'error' }),
-        new winston.transports.File({ filename: comboFilePath }),
-        new winston.transports.Console({ format: winston.format.simple() })
-    ]
-});
-
-
-module.exports.log = log;
+todo();
