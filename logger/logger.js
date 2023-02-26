@@ -39,7 +39,8 @@ const log = winston.createLogger({
     transports: [
         new winston.transports.File({ filename: errorFilePath, level: 'error' }),
         new winston.transports.File({ filename: comboFilePath }),
-        new winston.transports.Console({ format: winston.format.simple() })
+        // new winston.transports.Console({ format: winston.format.simple() })
+        new winston.transports.Console({ format: winston.format.printf(info => `[${info.timestamp}] (${info.level}): ${info.repo} > ${info.category} > ${info.subcategory} - ${info.message} ${info.stack ? '\n' + info.stack : ''}`) })
     ]
 });
 
