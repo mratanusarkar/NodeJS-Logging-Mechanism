@@ -1,0 +1,28 @@
+{
+  "name": "nodejs-logging-mechanism",
+  "version": "1.0.0",
+  "description": "a logging framework for node js applications using winston",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mratanusarkar/NodeJS-Logging-Mechanism.git"
+  },
+  "keywords": [
+    "log",
+    "logging",
+    "winston",
+    "nodejs"
+  ],
+  "author": "Atanu Sarkar <mratanusarkar@gmail.com> (https://github.com/mratanusarkar)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mratanusarkar/NodeJS-Logging-Mechanism/issues"
+  },
+  "homepage": "https://github.com/mratanusarkar/NodeJS-Logging-Mechanism#readme",
+  "dependencies": {
+    "winston": "^3.8.2"
+  }
+}
