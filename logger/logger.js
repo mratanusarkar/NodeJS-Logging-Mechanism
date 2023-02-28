@@ -1,4 +1,5 @@
 const winston = require('winston');
+require('winston-daily-rotate-file');
 
 // decide on log level based on environment [dev / qa / staging / prod]
 const environment = 'dev'; // to be added from process.env
@@ -12,9 +13,8 @@ let location = 'local runtime'
 
 // output file
 let logDir = './logFiles/';
-let date = new Date().toISOString().split('T')[0];
-let errorFilePath = logDir + date + '-' + 'error.log';
-let comboFilePath = logDir + date + '-' + 'combined.log';
+let errorFileName = 'error.log';
+let comboFileName = 'combined.log';
 
 
 /*
@@ -37,9 +37,16 @@ const log = winston.createLogger({
     ),
     defaultMeta: { project: project, repo: repo, type: type, location: location },
     transports: [
-        new winston.transports.File({ filename: errorFilePath, level: 'error' }),
-        new winston.transports.File({ filename: comboFilePath }),
-        // new winston.transports.Console({ format: winston.format.simple() })
+        new winston.transports.DailyRotateFile({
+            level: 'error',
+            filename: `${logDir}%DATE%-${errorFileName}`,
+            datePattern: 'YYYY-MM-DD'
+        }),
+        new winston.transports.DailyRotateFile({
+            filename: `${logDir}%DATE%-${comboFileName}`,
+            datePattern: 'YYYY-MM-DD'
+        }),
+        // new winston.transports.Console({ format: winston.format.simple() }),
         new winston.transports.Console({ format: winston.format.printf(info => `[${info.timestamp}] (${info.level}): ${info.repo} > ${info.category} > ${info.subcategory} - ${info.message} ${info.stack ? '\n' + info.stack : ''}`) })
     ]
 });
