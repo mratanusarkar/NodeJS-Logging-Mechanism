@@ -44,14 +44,40 @@ const log = winston.createLogger({
             zippedArchive: true,
             maxSize: null,
             maxFiles: '30d'
+        }).on('new', function (newFilename) {
+            console.log("> on new:", newFilename);
+            // do something, or perform some actions...
+        }).on('rotate', function (oldFilename, newFilename) {
+            console.log("> on rotate:", oldFilename, newFilename);
+            // do something, or perform some actions...
+        }).on('archive', function (zipFilename) {
+            console.log("> on archive:", zipFilename);
+            // do something, or perform some actions...
+        }).on('logRemoved', function (removedFilename) {
+            console.log("> on logRemoved:", removedFilename);
+            // do something, or perform some actions...
         }),
+
         new winston.transports.DailyRotateFile({
             filename: `${logDir}%DATE%-${comboFileName}`,
             datePattern: 'YYYY-MM-DD',
             zippedArchive: true,
             maxSize: null,
             maxFiles: '30d'
+        }).on('new', function (newFilename) {
+            console.log("> on new:", newFilename);
+            // do something, or perform some actions...
+        }).on('rotate', function (oldFilename, newFilename) {
+            console.log("> on rotate:", oldFilename, newFilename);
+            // do something, or perform some actions...
+        }).on('archive', function (zipFilename) {
+            console.log("> on archive:", zipFilename);
+            // do something, or perform some actions...
+        }).on('logRemoved', function (removedFilename) {
+            console.log("> on logRemoved:", removedFilename);
+            // do something, or perform some actions...
         }),
+
         // new winston.transports.Console({ format: winston.format.simple() }),
         new winston.transports.Console({ format: winston.format.printf(info => `[${info.timestamp}] (${info.level}): ${info.repo} > ${info.category} > ${info.subcategory} - ${info.message} ${info.stack ? '\n' + info.stack : ''}`) })
     ]
