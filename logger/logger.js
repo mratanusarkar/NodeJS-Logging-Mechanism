@@ -32,6 +32,23 @@ let comboFileName = 'combined.log';
  * 
  * You can also pass an object along with the log data in the end, that will act as a metadata.
  * a sample object format: `{ category: '<enter-category>', subcategory: '<enter-subcategory>' }`
+ * 
+ * Example 1:
+ * ```javascript
+ * const logger = require('../logger/logger');
+ * logger.log.info(`my info message with some data: ${data}`, { category: 'file locator', subcategory: 'code block locator' });
+ * ```
+ * 
+ * Example 2:
+ * ```javascript
+ * import { log } from '../logger/logger';
+ * try {
+ *   // some code
+ * }
+ * catch (err) {
+ *   log.error(err, { category: 'file locator', subcategory: 'code block locator' });
+ * }
+ * ```
  */
 const log = winston.createLogger({
     level: level,
