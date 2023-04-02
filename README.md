@@ -35,6 +35,20 @@ catch (err) {
 }
 ```
 
+Along with the log data generated from the system or codebase (messages for all log levels, and error stack + message for error log level), we also have some metadata to help identify the source of the logs.
+
+The metadatas available are listed below:
+- **project**: name of the project
+- **repo**: the repo where the code resides
+- **type**: what type of repo it is? backend? frontend? cloud app?
+- **location**: where is the repo hosted?
+- **timestamp**: the time when this log was generated
+- **level**: what kind of log it is? info? error? etc... (RFC5424)
+- **category**: the category this log belongs to (maybe file name or similar)
+- **subcategory**: division of category (maybe line no, fn name, or logic - reference)
+- **message**: the actual error message
+- **stack**: if error, full error stack trace
+
 # About Logging Mechanism
 This project was inspired from the talk "[Everything You Wanted to Know About Logging](https://www.youtube.com/watch?v=pkh3J3u-jN4&ab_channel=node.js)" by Charlie Robbins
 
