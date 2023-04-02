@@ -17,15 +17,16 @@ let errorFileName = 'error.log';
 let comboFileName = 'combined.log';
 
 
-/*
- * Note: Log Levels used as per RFC5424 are:
- * 0: error
- * 1: warn
- * 2: info
- * 3: http
- * 4: verbose
- * 5: debug
- * 6: silly
+/**
+ * Note: Log Levels available (as per RFC5424) are:
+ * 
+ * 0. error
+ * 1. warn
+ * 2. info
+ * 3. http
+ * 4. verbose
+ * 5. debug
+ * 6. silly
  */
 const log = winston.createLogger({
     level: level,
