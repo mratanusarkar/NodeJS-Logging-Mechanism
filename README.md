@@ -34,3 +34,25 @@ catch (err) {
   log.error(err, { category: 'file locator', subcategory: 'code block locator' });
 }
 ```
+
+# About Logging Mechanism
+This project was inspired from the talk "[Everything You Wanted to Know About Logging](https://www.youtube.com/watch?v=pkh3J3u-jN4&ab_channel=node.js)" by Charlie Robbins
+
+I have broken down the logging mechanism into 5 acts. (similar to what is there in the talk, but not exactly the same)
+
+They are:
+
+1. Act I - Log Levels & Log Format
+
+
+2. Act II - Log Transport & Log Rotate
+
+
+3. Act III - Stream & Transfer
+
+
+4. Act IV - Collect & Combine the Logs
+
+
+5. Act V - Visualize, Filter & Sort, and Mutation
+
