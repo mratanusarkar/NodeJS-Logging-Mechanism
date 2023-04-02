@@ -18,6 +18,8 @@ let comboFileName = 'combined.log';
 
 
 /**
+ * A log object that will take care of the logging mechanism, built on top of Winston.
+ * 
  * Note: Log Levels available (as per RFC5424) are:
  * 
  * 0. error
@@ -27,6 +29,9 @@ let comboFileName = 'combined.log';
  * 4. verbose
  * 5. debug
  * 6. silly
+ * 
+ * You can also pass an object along with the log data in the end, that will act as a metadata.
+ * a sample object format: `{ category: '<enter-category>', subcategory: '<enter-subcategory>' }`
  */
 const log = winston.createLogger({
     level: level,
