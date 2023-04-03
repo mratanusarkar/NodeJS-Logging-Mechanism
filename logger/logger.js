@@ -1,5 +1,6 @@
 const winston = require('winston');
 require('winston-daily-rotate-file');
+const transfer = require('./transfer');
 
 // decide on log level based on environment [dev / qa / staging / prod]
 const environment = 'dev'; // to be added from process.env
@@ -72,7 +73,11 @@ const log = winston.createLogger({
             // do something, or perform some actions...
         }).on('rotate', function (oldFilename, newFilename) {
             console.log("> on rotate:", oldFilename, newFilename);
+            
             // do something, or perform some actions...
+            let blobRoot = `${project}/${repo}`;
+            transfer.toAzBlob(blobRoot, oldFilename);
+            
         }).on('archive', function (zipFilename) {
             console.log("> on archive:", zipFilename);
             // do something, or perform some actions...
@@ -92,7 +97,11 @@ const log = winston.createLogger({
             // do something, or perform some actions...
         }).on('rotate', function (oldFilename, newFilename) {
             console.log("> on rotate:", oldFilename, newFilename);
+            
             // do something, or perform some actions...
+            let blobRoot = `${project}/${repo}`;
+            transfer.toAzBlob(blobRoot, oldFilename);
+                        
         }).on('archive', function (zipFilename) {
             console.log("> on archive:", zipFilename);
             // do something, or perform some actions...
