@@ -42,5 +42,42 @@ async function uploadFileString(containerName, fileName, fileString) {
     });
 }
 
+/**
+ * 
+ * @param { String } blobRoot the root of the blob file structure. expected format: `project/repo`
+ * @param { String } logFilename the log file name should be in the format: `logDir/YYYY-MM-DD-HH-fileName`
+ */
+async function toAzBlob(blobRoot, logFilename) {
+    try {
+        let nameSplit = (logFilename.split(`logFiles${path.sep}`)[1].split("-"));
+        let _L_YY = nameSplit[0];
+        let _L_MM = nameSplit[1];
+        let _L_DD = nameSplit[2];
+        let _L_TYPE = nameSplit[nameSplit.length-1];    // log type: use it in future if required. (eg: split error and combo logs into different places)
+        const blobFullPath = `${blobRoot}/${_L_YY}/${_L_MM}/${_L_DD}/${uid}/${nameSplit.join("-")}`;
+        
+        const data = fs.readFileSync(path.resolve(logFilename), 'utf8');
+        uploadFileString(containerName, blobFullPath, data).then((value) => {
+            console.log(value);
+            return {
+                success: true,
+                message: "transfer to azure blob completed"
+            }
+        }).catch((reason) => {
+            console.log(reason);
+            return {
+                success: false,
+                message: "ERROR: transfer to azure blob failed!"
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        return {
+            success: false,
+            message: "ERROR: issue occurred while reading the log file and preparing the blob path!"
+        }
+    }
+}
 
-module.exports.uploadFileString = uploadFileString;
+
+module.exports.toAzBlob = toAzBlob;
